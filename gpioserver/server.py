@@ -1,0 +1,36 @@
+
+"""
+This is a zmq server that controlls the gpios via socket requests
+"""
+
+import time
+import threading
+import zmq
+
+try:
+  import RPi.GPIO as GPIO
+except RuntimeError:
+  print "error importing RPi.GPIO. Try running as root."
+
+print dir(GPIO)
+
+
+GPIO.setmode(GPIO.BOARD)
+
+for x in range(8):
+  GPIO.setup(x, GPIO.OUT, initial=GPIO.LOW)
+
+context = zmq.Context()
+socket = context.socket(zmq.REP)
+socket.bind("tcp://*:5555")
+
+print "server is running..."
+
+while True:
+  message = socket.recv()
+  print "recieve %s" % message
+  socket.send("request was recieved")
+
+
+
+
