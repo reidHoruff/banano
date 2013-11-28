@@ -15,7 +15,7 @@ except RuntimeError:
 
 GPIO.setmode(GPIO.BMC)
 
-for x in [4]
+for x in [4]:
   GPIO.setup(x, GPIO.OUT)
 
 context = zmq.Context()
