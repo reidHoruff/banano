@@ -29,4 +29,4 @@ while True:
   port = int(data[0])
   value = bool(int(data[1]))
   GPIO.output(port, value)
-  socket.send("request was recieved")
+  socket.send("");
