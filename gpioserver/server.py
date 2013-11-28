@@ -13,9 +13,9 @@ except RuntimeError:
   print "error importing RPi.GPIO. Try running as root."
 
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BMC)
 
-for x in range(8):
+for x in [4]
   GPIO.setup(x, GPIO.OUT)
 
 context = zmq.Context()
