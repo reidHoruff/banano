@@ -13,7 +13,7 @@ except RuntimeError:
   print "error importing RPi.GPIO. Try running as root."
 
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 for x in range(8):
   GPIO.setup(x, GPIO.OUT)
