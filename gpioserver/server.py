@@ -26,7 +26,11 @@ print "server is running..."
 
 while True:
   message = socket.recv()
-  print "recieve %s" % message
+  data = message.split(':')
+  port = int(data[0])
+  value = bool(data[1])
+  print "%s %s" % (port, value)
+
   socket.send("request was recieved")
 
 
