@@ -19,7 +19,6 @@ if __name__ == '__main__':
   value = True
   c = GPIOClient()
   while True:
-    raw_input()
     print foo
     c.request(4, value)
     value = not value
