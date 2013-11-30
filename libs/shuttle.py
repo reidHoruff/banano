@@ -35,7 +35,6 @@ class RequestShuttle:
 
   def serialize(self):
     obj = [None, None, None]
-    
     if self.joystick_a:
       obj[0] = self.joystick_a.serialize()
     if self.joystick_b:
@@ -43,12 +42,18 @@ class RequestShuttle:
     obj[2] = self.message
     return obj
 
+  def serialize_json(self):
+    return json.dumps(self.serialize())
+
   def construct(self, obj):
     if self.joystick_a:
       self.joystick_a.construct(obj[0])
     if self.joystick_b:
       self.joystick_b.construct(obj[1])
     self.message = obj[2]
+
+  def construct_from_json(self, js):
+    self.construct(json.loads(js))
 
   def __str__(self):
     return str(self.serialize())

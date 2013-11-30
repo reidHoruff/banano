@@ -1,9 +1,16 @@
 import pygame
+import time
+import zmq
 from ...libs.joystick import *
 from ...libs.shuttle import *
 
 if __name__ == '__main__':
   print "Banano for OSX"
+  context = zmq.Context() 
+  socket = context.socket(zmq.REQ)
+  #socket.connect("tcp://192.168.2.8:5555")
+  socket.connect("tcp://localhost:5555")
+
   clock = pygame.time.Clock()
   pygame.init()
   pygame.joystick.init()
@@ -31,6 +38,9 @@ if __name__ == '__main__':
     request_shuttle.read_joysticks()
     obj = request_shuttle.serialize()
 
-    recieve_shuttle.construct(obj)
-    print recieve_shuttle.joystick_a
+    print "sending..."
+    socket.send(request_shuttle.serialize_json())
+    response = socket.recv()
+    print "response:", response
 
+    time.sleep(1.0/30.0)
